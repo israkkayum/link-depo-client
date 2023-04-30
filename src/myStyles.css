@@ -1,0 +1,12 @@
+input {
+  border: 0;
+}
+
+input:focus {
+  outline: 0;
+  border: none;
+}
+
+input::placeholder {
+  border: 0;
+}

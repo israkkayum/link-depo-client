@@ -1,10 +1,27 @@
 import { Box, CircularProgress, Paper } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import CompleteProfile from "../../YourProfile/CompleteProfile/CompleteProfile";
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, setIsLoading } = useAuth();
+  const [profile, setProfile] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(`https://link-depo.vercel.app/profile/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.userName) {
+          setProfile(true);
+        }
+      })
+      .finally(() => {
+        if (user.email) setIsLoading(false);
+      });
+  }, [user.email]);
+
   let location = useLocation();
   if (isLoading) {
     return (
@@ -34,8 +51,10 @@ const PrivateRoute = ({ children, ...rest }) => {
       </Box>
     );
   }
-  if (user.email) {
+  if (user.email && profile) {
     return children;
+  } else if (user.email) {
+    return <CompleteProfile />;
   }
   return <Navigate to="/login" state={{ from: location }} />;
 };

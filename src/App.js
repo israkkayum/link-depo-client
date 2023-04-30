@@ -1,7 +1,7 @@
 // import logo from "./logo.svg";
 // import "./App.css";
 import Navbar from "./components/Share/Navbar/Navbar";
-import Profile from "./components/Profile/Profile/Profile";
+import Profile from "./components/YourProfile/Profile/Profile";
 import Footer from "./components/Share/Footer/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { render } from "react-dom";
@@ -10,7 +10,7 @@ import Login from "./components/Security/Login/Login";
 import AuthProvider from "./contexts/AuthProvider/AuthProvider";
 import PrivateRoute from "./components/Security/PrivateRoute/PrivateRoute";
 import PageNotFound from "./components/Share/PageNotFound/PageNotFound";
-import ProfileSetting from "./components/Profile/ProfileSetting/ProfileSetting";
+import SettingsHome from "./components/Settings/SettingsHome/SettingsHome";
 
 function App() {
   render(
@@ -27,10 +27,10 @@ function App() {
             }
           />
           <Route
-            path="/profile-settings"
+            path="/settings"
             element={
               <PrivateRoute>
-                <ProfileSetting></ProfileSetting>
+                <SettingsHome></SettingsHome>
               </PrivateRoute>
             }
           />

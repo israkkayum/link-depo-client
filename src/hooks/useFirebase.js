@@ -152,7 +152,7 @@ const useFirebase = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:65000/${user.email}`)
+    fetch(`https://link-depo.vercel.app/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setAdmin(data.admin));
   }, [user.email]);
@@ -171,7 +171,7 @@ const useFirebase = () => {
 
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("http://localhost:65000/users", {
+    fetch("https://link-depo.vercel.app/users", {
       method: method,
       headers: {
         "content-type": "application/json",
@@ -181,7 +181,7 @@ const useFirebase = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:65000/users")
+    fetch("https://link-depo.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setGetuser(data));
   }, []);
@@ -189,6 +189,7 @@ const useFirebase = () => {
   return {
     user,
     isLoading,
+    setIsLoading,
     authError,
     authInfo,
     admin,
